@@ -3,12 +3,12 @@
 # Installs nix if not present, then adds the userEnv profile.
 #
 # Run on the target machine (not from the Mac):
-#   curl -fsSL https://raw.githubusercontent.com/YOUR_USER/nix-darwin-config/main/scripts/install-user-env.sh | bash
+#   curl -fsSL https://raw.githubusercontent.com/flatballer/nix-config/main/scripts/install-user-env.sh | bash
 # or from a local clone:
 #   ./scripts/install-user-env.sh
 set -euo pipefail
 
-FLAKE_URL="${1:-github:YOUR_USER/nix-darwin-config}"
+FLAKE_URL="${1:-github:flatballer/nix-config}"
 
 # 1. Install nix if missing
 if ! command -v nix &>/dev/null; then

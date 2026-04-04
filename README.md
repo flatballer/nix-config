@@ -1,4 +1,4 @@
-# nix-darwin-config
+# nix-config
 
 Cross-platform nix configuration for macOS, NixOS (Raspberry Pi), Ubuntu/Jetson nix profiles, and Docker images. All machines share the same tool set and a unified [nixvim](https://github.com/nix-community/nixvim) Neovim configuration managed by nix — no Homebrew, no Mason, no lazy.nvim.
 
@@ -110,7 +110,7 @@ After first boot, the Pi can itself serve as a remote builder — see [Remote bu
 
 ```sh
 # From the Pi (pull latest config and rebuild):
-nixos-rebuild switch --flake github:YOUR_USER/nix-darwin-config#pi4
+nixos-rebuild switch --flake github:flatballer/nix-config#pi4
 # or with a local clone:
 nixos-rebuild switch --flake /path/to/nix-darwin-config#pi4
 ```
