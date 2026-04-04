@@ -20,9 +20,6 @@
 
   globals = {
     mapleader = " ";
-    # markdown-preview
-    mkdp_auto_start = 0;
-    mkdp_auto_close = 1;
     # dadbod-ui
     db_ui_use_nerd_fonts = 1;
   };
@@ -261,6 +258,10 @@
     # Markdown preview
     markdown-preview = {
       enable = true;
+      settings = {
+        auto_start = 0;
+        auto_close = 1;
+      };
     };
 
     # Dadbod (SQL)
