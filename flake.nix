@@ -5,18 +5,28 @@
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
     nix-darwin.url = "github:nix-darwin/nix-darwin/master";
     nix-darwin.inputs.nixpkgs.follows = "nixpkgs";
+    nixvim.url = "github:nix-community/nixvim";
+    nixvim.inputs.nixpkgs.follows = "nixpkgs";
   };
 
   outputs = inputs @ {
     self,
     nix-darwin,
     nixpkgs,
+    nixvim,
   }: let
+    system = "aarch64-darwin";
+    pkgsFor = nixpkgs.legacyPackages.${system};
+    nvim = nixvim.lib.${system}.makeNixvimWithModule {
+      pkgs = pkgsFor;
+      module = import ./nixvim.nix;
+    };
     configuration = {pkgs, ...}: {
       nix.enable = false;
       # List packages installed in system profile. To search by name, run:
       # $ nix-env -qaP | grep wget
       environment.systemPackages = with pkgs; [
+        nvim
         nixd
         alejandra
         ruff
@@ -26,7 +36,6 @@
         fzf
         fzf-zsh-plugin
         zsh-fzf-tab
-        neovim
         zoxide
         nmap
         tree-sitter
@@ -50,7 +59,7 @@
       system.stateVersion = 6;
 
       # The platform the configuration will be used on.
-      nixpkgs.hostPlatform = "aarch64-darwin";
+      nixpkgs.hostPlatform = system;
       
       # Enable Touch ID auth for sudo 
       security.pam.services.sudo_local.touchIdAuth = true;
