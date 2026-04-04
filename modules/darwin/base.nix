@@ -13,6 +13,35 @@
     carapace-bridge
   ];
 
+  environment.shellAliases = {
+    ls = "eza --icons";
+    ll = "eza -la --icons --git";
+    la = "eza -a --icons";
+    lt = "eza --tree --icons";
+    cat = "bat";
+  };
+
+  programs.zsh = {
+    enable = true;
+    enableCompletion = true;
+    interactiveShellInit = ''
+      # fzf shell integration
+      source ${pkgs.fzf-zsh-plugin}/share/zsh/plugins/fzf/fzf.plugin.zsh
+
+      # fzf-tab (must come after compinit, which enableCompletion triggers)
+      source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh
+
+      # zoxide (smart cd)
+      eval "$(zoxide init zsh)"
+
+      # direnv hook
+      eval "$(direnv hook zsh)"
+
+      # carapace completions
+      source <(carapace _carapace zsh)
+    '';
+  };
+
   security.pam.services.sudo_local.touchIdAuth = true;
 
   system.configurationRevision = self.rev or self.dirtyRev or null;

@@ -16,5 +16,15 @@
     carapace
     gh
     eza
+    # Modern GNU replacements
+    ripgrep
+    fd
+    delta
+    jq
+    yq
+    bottom
+    dust
+    procs
+    direnv
   ];
 }
