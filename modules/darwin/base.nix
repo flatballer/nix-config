@@ -64,25 +64,25 @@
   # from this Mac. The Pi itself can serve as an aarch64-linux builder once
   # provisioned. You may also use a Linux VM or cloud instance.
   #
-  # nix.distributedBuilds = true;
-  # nix.buildMachines = [
-  #   {
-  #     hostName = "builder.local";       # or IP / SSH alias
-  #     system = "aarch64-linux";
-  #     maxJobs = 4;
-  #     speedFactor = 2;
-  #     supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-  #     sshUser = "nix-build";
-  #     sshKey = "/etc/nix/builder_key";
-  #   }
-  #   {
-  #     hostName = "builder-x86.local";
-  #     system = "x86_64-linux";
-  #     maxJobs = 4;
-  #     speedFactor = 2;
-  #     supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-  #     sshUser = "nix-build";
-  #     sshKey = "/etc/nix/builder_key";
-  #   }
-  # ];
+  nix.distributedBuilds = true;
+  nix.buildMachines = [
+    {
+      hostName = "builder.local";       # or IP / SSH alias
+      system = "aarch64-linux";
+      maxJobs = 4;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      sshUser = "nix-build";
+      sshKey = "/etc/nix/builder_key";
+    }
+    {
+      hostName = "builder-x86.local";
+      system = "x86_64-linux";
+      maxJobs = 4;
+      speedFactor = 2;
+      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
+      sshUser = "nix-build";
+      sshKey = "/etc/nix/builder_key";
+    }
+  ];
 }
