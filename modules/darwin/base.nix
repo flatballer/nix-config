@@ -2,7 +2,7 @@
 {
   imports = [ ../common.nix ];
 
-  nix.enable = false;
+  nix.enable = false; # Determinate Systems manages the Nix daemon
   nix.settings.experimental-features = "nix-command flakes";
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
@@ -60,29 +60,19 @@
     screensaver.askForPasswordDelay = 10;
   };
 
-  # Uncomment and configure to enable cross-building aarch64-linux/x86_64-linux
-  # from this Mac. The Pi itself can serve as an aarch64-linux builder once
-  # provisioned. You may also use a Linux VM or cloud instance.
-  #
+  # aarch64-linux remote builder for cross-compilation.
+  # Start the VM manually (once): nix run nixpkgs#darwin.linux-builder
+  # It listens on localhost:31022 and auto-configures SSH access.
   nix.distributedBuilds = true;
   nix.buildMachines = [
     {
-      hostName = "builder.local";       # or IP / SSH alias
+      hostName = "linux-builder";
       system = "aarch64-linux";
       maxJobs = 4;
       speedFactor = 2;
       supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      sshUser = "nix-build";
-      sshKey = "/etc/nix/builder_key";
-    }
-    {
-      hostName = "builder-x86.local";
-      system = "x86_64-linux";
-      maxJobs = 4;
-      speedFactor = 2;
-      supportedFeatures = [ "nixos-test" "benchmark" "big-parallel" "kvm" ];
-      sshUser = "nix-build";
-      sshKey = "/etc/nix/builder_key";
+      sshUser = "builder";
+      sshKey = "/etc/nix/builder_ed25519";
     }
   ];
 }
