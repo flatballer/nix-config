@@ -76,6 +76,16 @@
       ];
     };
 
+    # ── NixOS: openclaw (Raspberry Pi 5) ──────────────────────────────────
+    nixosConfigurations.openclaw = nixpkgs.lib.nixosSystem {
+      system = "aarch64-linux";
+      specialArgs = { inherit inputs nixos-hardware; };
+      modules = [
+        ./hosts/openclaw/default.nix
+        { environment.systemPackages = [ (nvimFor "aarch64-linux") ]; }
+      ];
+    };
+
     # ── Per-system packages ───────────────────────────────────────────────
     packages = {
       # Standalone nvim (useful for quick installs: nix run .#packages.<sys>.nvim)
