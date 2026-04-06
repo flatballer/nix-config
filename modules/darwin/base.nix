@@ -11,7 +11,10 @@
     fzf-zsh-plugin
     zsh-fzf-tab
     carapace-bridge
+    ghostty
   ];
+
+  fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
 
   environment.shellAliases = {
     ls = "eza --icons";
