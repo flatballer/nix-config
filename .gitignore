@@ -1,7 +1,10 @@
 # Nix build results
 result
 result-*
-# macOS
+
+# linux-builder VM artifacts
+keys/
+nixos.qcow2
 
 # macOS
 .DS_Store
