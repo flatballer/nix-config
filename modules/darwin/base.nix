@@ -7,11 +7,11 @@
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # Darwin-only packages
+  # Note: ghostty is not in nixpkgs for macOS; install manually from ghostty.org
   environment.systemPackages = with pkgs; [
     fzf-zsh-plugin
     zsh-fzf-tab
     carapace-bridge
-    ghostty
   ];
 
   fonts.packages = [ pkgs.nerd-fonts.jetbrains-mono ];
