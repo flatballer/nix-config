@@ -4,6 +4,7 @@
 
   nix.enable = false; # Determinate Systems manages the Nix daemon
   nix.settings.experimental-features = "nix-command flakes";
+  nix.settings.builders-use-substitutes = true;
   nix.nixPath = [ "nixpkgs=${inputs.nixpkgs}" ];
 
   # Darwin-only packages
@@ -29,7 +30,7 @@
     enableCompletion = true;
     interactiveShellInit = ''
       # fzf shell integration
-      source ${pkgs.fzf-zsh-plugin}/share/zsh/plugins/fzf/fzf.plugin.zsh
+      source ${pkgs.fzf-zsh-plugin}/share/zsh/fzf-zsh-plugin/fzf-zsh-plugin.plugin.zsh
 
       # fzf-tab (must come after compinit, which enableCompletion triggers)
       source ${pkgs.zsh-fzf-tab}/share/fzf-tab/fzf-tab.plugin.zsh

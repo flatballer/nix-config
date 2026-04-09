@@ -17,6 +17,7 @@ echo "==> Building NixOS SD image for openclaw (Raspberry Pi 4)..."
 echo "    (requires aarch64-linux remote builder from Mac)"
 sudo nix build "${FLAKE_DIR}#nixosConfigurations.openclaw.config.system.build.sdImage" \
   --print-build-logs \
+  --builders-use-substitutes \
   "$@"
 
 echo ""
