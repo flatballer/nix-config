@@ -76,7 +76,7 @@
       ];
     };
 
-    # ── NixOS: openclaw (Raspberry Pi 5) ──────────────────────────────────
+    # ── NixOS: openclaw (Raspberry Pi 4) ──────────────────────────────────
     nixosConfigurations.openclaw = nixpkgs.lib.nixosSystem {
       system = "aarch64-linux";
       specialArgs = { inherit inputs nixos-hardware; };

@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Build a NixOS SD card image for openclaw (Raspberry Pi 5).
+# Build a NixOS SD card image for openclaw (Raspberry Pi 4).
 #
 # Requirements:
 #   - An aarch64-linux remote builder configured in modules/darwin/base.nix
@@ -13,9 +13,9 @@ set -euo pipefail
 
 FLAKE_DIR="$(cd "$(dirname "$0")/.." && pwd)"
 
-echo "==> Building NixOS SD image for openclaw (Raspberry Pi 5)..."
+echo "==> Building NixOS SD image for openclaw (Raspberry Pi 4)..."
 echo "    (requires aarch64-linux remote builder from Mac)"
-nix build "${FLAKE_DIR}#nixosConfigurations.openclaw.config.system.build.sdImage" \
+sudo nix build "${FLAKE_DIR}#nixosConfigurations.openclaw.config.system.build.sdImage" \
   --print-build-logs \
   "$@"
 
