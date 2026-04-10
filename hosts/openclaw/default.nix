@@ -35,6 +35,12 @@
     };
   };
 
+  environment.systemPackages = [ pkgs.nodejs ];
+
+  users.users.schraube = {
+    isNormalUser = true;
+  };
+
   users.users.tommy = {
     isNormalUser = true;
     extraGroups = [ "wheel" ];
@@ -48,6 +54,9 @@
   # Headless — no desktop environment or display manager
   services.xserver.enable = false;
   systemd.defaultUnit = "multi-user.target";
+
+  # nixos-hardware rpi4 adds modules (e.g. dw-hdmi) not present in the RPi kernel
+  boot.initrd.allowMissingModules = true;
 
   # ── Tailscale ────────────────────────────────────────────────────────────
   # On first boot, auto-joins the tailnet using a pre-auth key stored in
