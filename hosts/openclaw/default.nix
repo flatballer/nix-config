@@ -35,7 +35,14 @@
     };
   };
 
-  environment.systemPackages = [ pkgs.nodejs ];
+  environment.systemPackages = with pkgs; [
+    nodejs
+    git
+    python3
+    uv
+    ty
+    ruff
+  ];
 
   users.users.schraube = {
     isNormalUser = true;
